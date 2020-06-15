@@ -1,17 +1,2 @@
-# 3 Month Project
-
-take time and practice this might be difficult 
-
-## Process
-
-finish the JavaScript in order  for python you don't need to follow order
-
-
-## Remember you need to Finish the course And  Then you publish not before that
-
-
-```
-be slow but steady remember whatever it takes inshall you will finish it
-no excuse
-```
-
+#this is a chat app based on node mongo html css and client side javascript
+## and the socket IO
