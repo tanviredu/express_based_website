@@ -1,0 +1,4 @@
+after addding static
+use this command
+
+=> python manage.py collectstatic

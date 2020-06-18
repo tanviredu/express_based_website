@@ -1,0 +1,26 @@
+{% extends 'App/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <img src="{% static 'images/mot.png' %}" width="50%" height=400"
+</br>
+    <h1 class="display-3">Hi!!!  I am Tanvir</h1>
+    <p class="lead">
+        I Enjoy making webapps
+      </p>
+    <a href="mailto:ornobtanvir.git@gmail.com" class="btn btn-outline-danger btn-lg" >Email Me</a>
+    <a href="https://www.github.com/tanviredu" class="btn btn-outline-info btn-lg" >My Github</a>
+
+
+    <div class="jumbotron">
+        <blockquote class="blockquote">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{job.image.url}}" preserveAspectRatio="xMidYMid slice"> </img>
+        <hr>
+            <p class="mb-0">{{job.summary}}</p>
+          </blockquote>
+    </div>
+
+    
+    
+{% endblock %}
