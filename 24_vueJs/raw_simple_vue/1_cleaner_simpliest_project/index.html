@@ -5,16 +5,141 @@
     <!-- CSS only -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
 
 <body>
+    <div id="app">
+
+        <div class="container">
+
+            <!--                    <img :src = "imgSrc" class="img-thumnail" style="height: 300px;width: 300px;" :title="imgTitle" >-->
+
+            <div class="text-center">
+                <h1 class="display-4">Some Useful Astroid Information</h1>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Astroid Id</th>
+                        <th scope="col">Astroid Name</th>
+                        <th scope="col">Threat</th>
+                        <th scope="col">Designation</th>
+                        <th scope="col">Close Approach Date</th>
+                    </tr>
+                </thead>
+                <tbody v-cloak >
+                    <tr v-for="(item,index) in astroids" :style="getStyle(item)">
+                        <th scope="row">{{index}}</th>
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.is_potentially_hazardous_asteroid}}</td>
+                        <td>{{item.designation}}</td>
+                        <td>{{get_approach_date(item)}}</td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
 
 </body>
+
+
+<script>
+    /* api will give you a random image source 
+                and some astroid list
+            */
+    var vm = new Vue({
+
+        el: "#app",
+        data: {
+            // in here you will just declare empty variable
+            // that will be filled afterward
+            imgSrc: "",
+            imgTitle: "",
+            astroids: []
+
+        },
+        created: function() {
+            // this is hooks in here you wil call he method
+
+            this.fetchpod();
+            this.fetchastroids();
+        },
+
+        computed: {
+            // it will be called after everything done
+        },
+        methods: {
+
+            // adding new method 
+            fetchpod: function() {
+                var apikey = "lS8TtJ6SBG2m3Hkczri4jEdquKMRKCsESV7xdrOr";
+                var url1 = "https://api.nasa.gov/planetary/apod?api_key=" + apikey;
+
+                // now you fetch the data
+                axios.get(url1)
+                    .then((res) => {
+                        vm.imgSrc = res.data.url;
+                        vm.imgTitle = res.data.title;
+                    })
+            },
+
+            fetchastroids: function() {
+                var apikey = "lS8TtJ6SBG2m3Hkczri4jEdquKMRKCsESV7xdrOr";
+                var url2 = "https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=" + apikey;
+
+                axios.get(url2)
+                    .then((res) => {
+
+                        vm.astroids = res.data.near_earth_objects;
+                    })
+
+
+            },
+            
+            get_approach_date:function(item){
+                
+                if(item.close_approach_data.length >0){
+                    return item.close_approach_data[0].close_approach_date;
+                }else{
+                    return "N/A"
+                }
+                
+            },
+            
+            getStyle:function(item){
+                if(item.close_approach_data.length !==0){
+                        return {
+                            border:"solid 2px blue",
+                            color:"blue"
+                        }
+                        }else{
+                            return {
+                            border:"solid 2px red",
+                            color:"red"
+                        }   
+                    
+                    
+                }
+            
+        }
+            
+        }
+    })
+
+</script>
 
 </html>
