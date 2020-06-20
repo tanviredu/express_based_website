@@ -1,17 +1,9 @@
-# 3 Month Project
+# Created a new django command name "load_pet_data"
 
-take time and practice this might be difficult 
+=> python manage.py load_pet_data
 
-## Process
+# this will load the pet data into Pet and Vaccine project
 
-finish the JavaScript in order  for python you don't need to follow order
-
-
-## Remember you need to Finish the course And  Then you publish not before that
-
-
-```
-be slow but steady remember whatever it takes inshall you will finish it
-no excuse
-```
-
+➜  wisdompets git:(master) ✗ python .\manage.py load_pet_data
+[+] Creating Vacine Data
+[+] Loading pet Data for adoption

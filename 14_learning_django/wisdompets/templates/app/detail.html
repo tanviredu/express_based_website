@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+
+    {% block content %}
+<center>
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{pet.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Age : {{pet.age}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Submitter : {{pet.submitter}}</h6>
+          <p class="card-text">{{pet.description}}</p>
+          <a href="{% url 'app:home' %}" class="card-link">Go to list</a>
+        </div>
+      </div>
+</center>
+    {% endblock %}

@@ -20,3 +20,6 @@ class Vaccine(models.Model):
     # and a vaccine can given to many pets
     name = models.CharField(max_length=50)
     
+    
+    def __str__(self):
+        return self.name
