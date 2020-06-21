@@ -27,16 +27,21 @@
                         <th scope="col">Country</th>
                         <th scope="col">Country Code</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Lat</th>
+                        <th scope="col">Lon</th>
                         <th scope="col">Death</th>
                         <th scope="col">Recovered</th>
                     </tr>
                 </thead>
                 <tbody v-cloak>
+
                     <tr v-for="(item,index) in covid_data" :style="filterstyle(item)">
                         <th scope="row">{{index}}</th>
                         <td>{{item.Country}}</td>
                         <td>{{item.CountryCode}}</td>
                         <td>{{item.Date}}</td>
+                        <td>{{item.Lat}}</td>
+                        <td>{{item.Lon}}</td>
                         <td>{{item.Deaths}}</td>
                         <td>{{item.Recovered}}</td>
                     </tr>
@@ -84,14 +89,13 @@
                 // adding new method 
                 fetchdata: function() {
                     //var apikey = "lS8TtJ6SBG2m3Hkczri4jEdquKMRKCsESV7xdrOr";
-                    var url1 = "https://api.covid19api.com/all";
+                    var url1 = "https://api.covid19api.com/country/bangladesh";
 
                     // now you fetch the data
                     axios.get(url1)
                         .then((res) => {
 
-                            vm.covid_data = res.data.slice(0, 3000);
-
+                            vm.covid_data = res.data;                        
                         })
 
 
